@@ -1,0 +1,115 @@
+/* Imagem da pagina Home*/
+.home-img{
+    max-width: 100%; 
+    min-width: auto;
+    max-height: 100%;
+}
+/* Logo que fica sobre a imagem da pagina Home */
+.logo-inicial{
+    width: 680px;
+    height: 400px;
+}
+/* imagem do tanjiro no bosque da aba sobre */
+.flores{
+    height: 625px; 
+    width: 880; 
+    border-radius: 25px;
+}
+
+/* .background-personagens */
+.background-IMG{
+    width: 1900px;
+    height: 880px;
+  }
+
+/* Logo acima do texto de cada Personagem */
+.logo-personagens{
+    height: 185px; 
+    width: 300px;
+}
+
+.pngPersonagem{
+    display: flex;
+    display: flex;
+    justify-content: right;
+    margin-right: 500px;
+    /* z-index: 10; */
+    margin-top: -420px;
+  }
+
+  
+/* Section personagens */
+  .Personagens {
+      display: flex;
+      width: 1900px;
+      height: 1000px;
+      /* align-items: flex-start; */
+      flex-direction: column;
+    } 
+    
+/* CSS dos botões */
+.li{
+  width: 120px;
+  height: 120px;
+  list-style: none;
+} 
+
+/* posiciona os botões na tela */
+.botoes {
+  top: 0;
+  right: 0;
+  display: flex ;
+  flex-direction: column;
+  height: 880px;
+  width: 180px;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: stretch;
+  margin-left: auto;
+  margin-top: -880;
+}
+
+
+
+.botoes .botao {
+  border: none;
+  background: #000000;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+/* Imagem redonda dentro do botão */
+.botoes .botao img {
+  border-radius: 50%;
+}
+
+
+/*  Bagulho sem funcionar para selecionar o botão
+.botoes .botao .selecionado {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px #D9D9D9;
+} */
+/* Imagem dos botão */
+.imgbt{
+  height: 12vh;
+  width: 6vw;
+}
+
+.informacoes{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 60px;
+  width: 500px;
+  height: 200px;
+  /* z-index: 10; */
+  margin-top: -600px;
+  color: #ffffff;
+}
+
+.informacoes .texto-personagens{
+  margin-left: 50px;
+}
