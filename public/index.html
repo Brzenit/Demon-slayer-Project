@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demon Slayer - Anime</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Demon Slayer</title>
+    <link rel="shortcut icon" href="/public/img/Icons/favicon_io/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css\style.css">
     <link rel="stylesheet" href="css/imagens.css">
 </head>
 
 <body>
-    <header id="header">
+    <header id="header" class="">
         <img class="Logo" src="./img/Sem Fundo/Demon-Slayer-Logo.png" alt="Logo Demon Slayer"
             style="height: 116px; width: 210px">
         <nav>
@@ -23,7 +23,7 @@
                 </li>
                 <li>
                     <a href="#sobre">
-                        Sobre o Projeto
+                        Sobre
                     </a>
                 </li>
                 <li>
@@ -96,13 +96,13 @@
                 circulação.
             </p>
         </div>
-        <img class="flores" src="./img/Demon-Slayer-diferencas-anime-manga.jpg" alt="Tanjiro_Floresta">
+        <img class="flores" src="./img/Demon Slayer Project/demon-slayer-tanjiro-wisteria-forest-kxmi4gp2cl75i7v1.gif" alt="Tanjiro_Floresta">
     </section>
     <section class="Personagens" id="Personagens">
 
 
         <div class="background-personagens">
-            <img class="background-IMG" src="./img/background.jpg" alt="background">
+            <!-- <img class="background-IMG" src="./img/background.jpg" alt="background"> -->
         </div>
         <div id="tanjiro_dados" style="display: block;">
             <div class="informacoes">
@@ -192,6 +192,8 @@
                 <img src="./img/Sem Fundo/Kyojuro_anime.webp" alt="png Tanjiro" style="height: 800px; width: 550px;">
             </div>
         </div>
+
+
         <ul class="botoes">
         <li class="li tanjiro">
             <button onclick="tanjiro()" class="botao selecionado">
@@ -230,7 +232,7 @@
     
 
     <footer>
-
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi mollitia culpa voluptates impedit fugiat laborum, corporis facilis asperiores odio dignissimos praesentium dolores totam recusandae deleniti deserunt vel dolorem suscipit reprehenderit!
     </footer>
 </body>
 
@@ -290,5 +292,14 @@
         uzui_dados.style.display = "none";
         rengoku_dados.style.display = "block";
     }
+
+    window.addEventListener('scroll', function() {
+  var navbar = document.getElementById('header');
+  if (window.scrollY > 0) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 
 </script>
