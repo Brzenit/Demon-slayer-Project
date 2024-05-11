@@ -11,10 +11,7 @@
 /* .Personagens{
   width: 100vw;
   height: 80vh;
-  margin-top: 90px;
-  background-image: url(/public/img/background.jpg);
-  background-size: cover;
-  background-position: center;
+  margin-top: 9px;
 } */
 
 /* Logo que fica sobre a imagem da pagina Home */
@@ -25,7 +22,7 @@
 /* imagem do tanjiro no bosque da aba sobre */
 .flores{
     height: 70vh; 
-    width: 40vw; 
+    width: 50vw; 
     border-radius: 25px;
 }
 
@@ -46,9 +43,9 @@
     display: flex;
     justify-content: right;
     margin-right: 500px;
-    /* z-index: 10; */
+    /* z-index: 10;  */
     margin-top: -420px;
-  }
+  } 
 
   
 /* Section personagens */
@@ -56,11 +53,8 @@
       display: flex;
       width: 100vw;
       height: 80vh;
-      margin-top: 999px;
+      /* margin-top: 100px; */
       position: absolute;
-      background-image: url(/public/img/background.jpg);
-      background-size: cover;
-      background-position: center;
       /* align-items: flex-start;  */
       flex-direction: column;
     }  
@@ -75,19 +69,15 @@
 
 /* posiciona os botões na tela */
 .botoes {
-  top: 0;
-  right: 0;
-  display: flex ;
-  flex-direction: column;
-  height: 880px;
-  width: 180px;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  background-color: rgba(0, 0, 0, 0.3);
-  align-items: stretch;
-  margin-left: auto;
-  margin-top: -880;
+    display: flex;
+    flex-direction: column;
+    width: 8vw;
+    height: 101vh;
+    background-color: blue;
+    margin-top: -400px;
+    position: fixed;
+    z-index: initial;
+    justify-content: space-between;
 }
 
 
@@ -110,6 +100,7 @@
   transform: scale(1.2);
   box-shadow: 0 0 10px #D9D9D9;
 } */
+
 /* Imagem dos botão */
 .imgbt{
   height: 12vh;

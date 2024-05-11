@@ -1,0 +1,175 @@
+body{
+    margin-top:200px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .login1{
+  background-image: url(../img/DemonSlayerProject/demon-slayer-rengoku-flame-gif-desktop-wallpaper.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+
+  .cadastro1{
+    background-image: url(../img/DemonSlayerProject/zenitsu-lightning-demon-slayer-gif-desktop-wallpaper.gif) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+  }
+a{
+    color: inherit;
+    text-decoration:none;
+  }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 285px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+  }
+  .voltar{
+    margin-top:10px;
+    background-color:#252525;
+    color: #ffffff;
+    width:75px;
+    height:30px;
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    justify-content: center; 
+  }
+  
+  .voltar:hover{
+  background-color:#000;
+  }
+  
+  .card.login {
+    display: flex;
+    background-image: linear-gradient(163deg, #ff0000 0%, #ffffff 100%);
+    width: 350px;
+    border-radius: 22px;
+    transition: all 0.3s;
+  }
+
+  .card.cadastro {
+    display: flex;
+    background-image: linear-gradient(163deg, #fbff00 0%, #ffffff 100%);
+    width: 350px;
+    border-radius: 22px;
+    transition: all 0.3s;
+  }
+  
+  .card2 {
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+  
+  .card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.9);
+  }
+  
+  #heading {
+    text-align: center;
+    margin: 2em;
+    color: rgb(255, 255, 255);
+    font-size: 2.2em;
+  }
+  
+  .field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  }
+  
+  .input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: white;
+  }
+  
+  .input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #d3d3d3;
+  }
+  
+  .form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 3.5em;
+  }
+  
+  .button1 {
+    padding: 0.5em;
+    padding-left: 1.1em;
+    padding-right: 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    background-color: #252525;
+    color: white;
+  }
+  
+  .button1:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  .button2 {
+    padding: 0.5em;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    background-color: #252525;
+    color: white;
+  }
+  
+  .button2:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  .button3 {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    background-color: #252525;
+    color: white;
+  }
+  
+  .button3:hover {
+    background-color: red;
+    color: white;
+  }
+  
