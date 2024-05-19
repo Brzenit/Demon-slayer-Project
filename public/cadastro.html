@@ -13,75 +13,31 @@
           <div class="voltar"><a href="index.html">Voltar</a></div>
             <p id="heading">Cadastro</p>
             <div class="field">
-              <svg
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                height="16"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-                class="input-icon"
-              >
-                <path
-                  d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"
-                ></path>
-              </svg>
+              
               <input
                 type="text"
                 class="input-field"
                 placeholder="Usuário"
                 autocomplete="off"
+                id="usuario_input"
               />
             </div>
             <div class="field">
-              <svg
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                height="16"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-                class="input-icon"
-              >
-                <path
-                  d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-                ></path>
-              </svg>
-              <input type="password" class="input-field" placeholder="Senha" />
+              
+              <input type="password" class="input-field" id="senha_input" placeholder="Senha" />
             </div>
             <div class="field">
-              <svg
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              height="16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-              class="input-icon"
-            >
-              <path
-                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-              ></path>
-            </svg>
-            <input type="password" class="input-field" placeholder="Repita a Senha" />     
+            <input type="password" class="input-field" id="confirmacao_senha_input" placeholder="Repita a Senha" />     
           </div>
-          <div class="field">
-            <svg
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            height="16"
-            width="16"
-            xmlns="http://www.w3.org/2000/svg"
-            class="input-icon"
-          >
-            <path
-              d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-            ></path>
-          </svg>
-          <input type="email" class="input-field" placeholder="E-mail" />     
+          <div class="field">          
+          <input type="email" class="input-field" id="email_input" placeholder="E-mail" />     
         </div>
             <div class="btn">
               <button class="button1">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./login.html">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </button>
-              <button class="button2">Cadastre-se</button>
+              <button type="button" class="button2" 
+              onclick= "cadastrar()">Cadastre-se</button>
             </div>
             <button class="button3">Esqueceu a senha?</button>
           </form>
@@ -90,3 +46,90 @@
       
 </body>
 </html>
+
+<script>
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = usuario_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    // var empresaVar = listaEmpresas.value
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == ""
+    ){
+      // empresaVar == ""0 
+        alert("Mensagem de erro para todos os campos em branco");
+
+      // finalizarAguardar();
+      return false;
+    } else {
+      // setInterval(sumirMensagem, 5000);
+      alert('Teste');
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+        // empresaServer: empresaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+          setTimeout(() => {
+            window.location = "./public/login.html";
+          }, "2000");
+
+          // limparFormulario();
+          // finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
+
+  // function sumirMensagem() {
+  //   cardErro.style.display = "none";
+  // }
+</script>
