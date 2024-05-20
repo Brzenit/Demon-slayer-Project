@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Demon Slayer</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        button{
+            cursor: pointer;
+        }
+
+        body{
+            background-color: black;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container{
+            background-color: black;
+            width: 90%;
+            max-width: 800px;
+            
+            border: 2px solid white;
+            border-radius: 6px;
+            padding: 16px;
+            box-shadow: 0 0 2px 2px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .questions-container{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .question{
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+
+        }
+
+        .answers-container{
+            width: 700px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .next-question{
+            margin-top: 32px;
+        }
+
+        .button {
+            background-color: red;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            border: 0;
+            border-radius: 6px;
+            height: 48px;
+            padding: 0 32px;
+
+            transition: filter 0.2s;
+        }
+
+        .button:not(:disabled):hover{
+            filter: brightness(0.8);
+        }
+
+        .button:disabled{
+            cursor: not-allowed;
+        }
+
+
+        .hide{
+            display: none;
+        }
+
+        .correct{
+            background-color: greenyellow;
+        }
+
+        .incorrect{
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+        <div id="box_div" class="question-container hide">
+            <center class="question">Pegunta sobre Demon Slayer Aqui</center>
+            <div id="respostas_div" class="answers-container">
+                <button class="answer button" disabled>Resposta 1</button>
+                <button class="answer button">Resposta 2</button>
+                <button class="answer button">Resposta 3</button>
+                <button class="answer button">Resposta 4</button>
+            </div>
+        </div>
+        <div class="controls-container">
+            <button id="start_btn" onclick="startQuiz()" class="start-quiz button">Começar Quiz</button>        
+            <button id="next_btn" onclick="nextQuestion()" class="next-question button hide">Proxima Pergunta</button>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    
+    const perguntaText = document.querySelector(".question");
+    let perguntaAtual = 0;
+
+
+    function startQuiz(){
+        start_btn.classList.add("hide");
+        box_div.classList.remove("hide");
+        next_btn.classList.remove("hide");  
+        nextQuestion();
+    }
+
+    function nextQuestion(){
+        while(respostas_div.firstChild){
+            respostas_div.removeChild(respostas_div.firstChild);
+        };
+        perguntaText.textContent = questions[perguntaAtual].question
+        questions[perguntaAtual].answers.forEach(answer =>{
+            const novaResposta = document.createElement("button")
+            novaResposta.classList.add("button" , "answer")
+            novaResposta.textContent = answer.text
+            if(answer.correct){
+                novaResposta.dataset.correct = answer.correct
+            }
+            respostas_div.appendChild(novaResposta)
+
+            novaResposta.addEventListener("click", selecionarResposta)
+        })
+    }
+
+    function selecionarResposta(event){
+        const respostaSelecionada = event.target;
+
+        if(respostaSelecionada.dataset.correct){
+            document.body.classList.add("correct");
+        }else{
+            document.body.classList.add("incorrect");
+        }
+        document.querySelectorAll(".answear").forEach(botao =>{
+            if(botao.dataset.correct){
+                botao.classList.add("correct")
+                
+            }else{
+                botao.classList.add("incorrect")
+            }
+            
+            botao.disabled = true
+        })
+
+        // console.log(event.target);
+    }
+
+    // function corBotao(){
+    //     document.querySelectorAll(".answear").forEach(botao =>{
+    //         if(botao.dataset.correct){
+    //             botao.classList.add(".correct")
+                
+    //         }else{
+    //             botao.classList.add(".incorrect")
+    //         }
+            
+    //         botao.disabled = true
+    //     })
+    // }
+
+
+
+    const questions = [
+        {
+            question: "Pergunta 1",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 2",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 3",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 4",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 5",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 6",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 7",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 8",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 9",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 10",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 11",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+        {
+            question: "Pergunta 12",
+            answers: [
+                {text: "Resposta 1", correct:false},
+                {text: "Resposta 2", correct:false},
+                {text: "Resposta 3", correct:true},
+                {text: "Resposta 4", correct:false}
+            ]
+        },
+    ]
+
+</script>

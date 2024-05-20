@@ -1,6 +1,7 @@
 var database = require("../database/config");
 
-function buscarAquariosPorEmpresa(empresaId) {
+function buscarAquariosPorEmpresa(empresaId, nome, idUsuario) {
+  //perguntar como puxar um atributo do banco
 
   var instrucaoSql = `SELECT * FROM usuario a WHERE idUsuario = ${idUsuario}`;
 
