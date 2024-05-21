@@ -4,121 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Demon Slayer</title>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        button{
-            cursor: pointer;
-        }
-
-        body{
-            background-color: black;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        .container{
-            background-color: black;
-            width: 90%;
-            max-width: 800px;
-            
-            border: 2px solid white;
-            border-radius: 6px;
-            padding: 16px;
-            box-shadow: 0 0 2px 2px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .questions-container{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .question{
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-
-        }
-
-        .answers-container{
-            width: 700px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 32px;
-        }
-
-        .next-question{
-            margin-top: 32px;
-        }
-
-        .button {
-            background-color: red;
-            color: black;
-            font-size: 16px;
-            font-weight: bold;
-            border: 0;
-            border-radius: 6px;
-            height: 48px;
-            padding: 0 32px;
-
-            transition: filter 0.2s;
-        }
-
-        .button:not(:disabled):hover{
-            filter: brightness(0.8);
-        }
-
-        .button:disabled{
-            cursor: not-allowed;
-        }
-
-
-        .hide{
-            display: none;
-        }
-
-        .correct{
-            background-color: greenyellow;
-        }
-
-        .incorrect{
-            background-color: purple;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/quiz.css">
+    <link rel="shortcut icon" href="./img/Icons/Demon-Slayer-Logo (1).ico">
 </head>
 <body>
-    <div class="container">
+    <div> 
+    <button class="button back">
+        <a href="./index.html">
+            Voltar
+        </a>
+    </button>    
+    </div>
+    
+        <div class="container">
        
         <div id="box_div" class="question-container hide">
             <center class="question">Pegunta sobre Demon Slayer Aqui</center>
             <div id="respostas_div" class="answers-container">
-                <button class="answer button" disabled>Resposta 1</button>
-                <button class="answer button">Resposta 2</button>
-                <button class="answer button">Resposta 3</button>
-                <button class="answer button">Resposta 4</button>
+                <button onclick="selecionarResposta()" class="answer button" disabled>Resposta 1</button>
+                <button onclick="selecionarResposta()" class="answer button">Resposta 2</button>
+                <button onclick="selecionarResposta()" class="answer button">Resposta 3</button>
+                <button onclick="selecionarResposta()" class="answer button">Resposta 4</button>
             </div>
         </div>
         <div class="controls-container">
-            <button id="start_btn" onclick="startQuiz()" class="start-quiz button">Começar Quiz</button>        
-            <button id="next_btn" onclick="nextQuestion()" class="next-question button hide">Proxima Pergunta</button>
+            <button id="start_btn" onclick="iniciarQuiz()" class="button">
+                Começar Quiz
+            </button>        
+            <button id="next_btn" onclick="nextQuestion()" class="button hide">
+                Proxima Pergunta
+            </button>
         </div>
     </div>
 
@@ -130,31 +45,47 @@
     
     const perguntaText = document.querySelector(".question");
     let perguntaAtual = 0;
+    let totalAcertos = 0; 
+
+    start_btn.addEventListener("click", iniciarQuiz);
+    next_btn.addEventListener("click", nextQuestion);
 
 
-    function startQuiz(){
+    function iniciarQuiz(){
         start_btn.classList.add("hide");
-        box_div.classList.remove("hide");
-        next_btn.classList.remove("hide");  
+        box_div.classList.remove("hide");  
         nextQuestion();
     }
 
     function nextQuestion(){
-        while(respostas_div.firstChild){
-            respostas_div.removeChild(respostas_div.firstChild);
-        };
+        resetTudo();
+        
+        if(questions.length === perguntaAtual){
+            return finishGame();
+        }
+
         perguntaText.textContent = questions[perguntaAtual].question
         questions[perguntaAtual].answers.forEach(answer =>{
             const novaResposta = document.createElement("button")
-            novaResposta.classList.add("button" , "answer")
+            novaResposta.classList.add( "answer" , "button" )
             novaResposta.textContent = answer.text
             if(answer.correct){
                 novaResposta.dataset.correct = answer.correct
+                
             }
             respostas_div.appendChild(novaResposta)
-
+            
             novaResposta.addEventListener("click", selecionarResposta)
+        
         })
+    }
+
+    function resetTudo(){
+        while(respostas_div.firstChild){
+                respostas_div.removeChild(respostas_div.firstChild);
+            };
+            document.body.classList.remove("correct" , "incorrect");
+            next_btn.classList.add("hide");
     }
 
     function selecionarResposta(event){
@@ -162,36 +93,65 @@
 
         if(respostaSelecionada.dataset.correct){
             document.body.classList.add("correct");
+            totalAcertos ++
         }else{
             document.body.classList.add("incorrect");
         }
-        document.querySelectorAll(".answear").forEach(botao =>{
-            if(botao.dataset.correct){
-                botao.classList.add("correct")
-                
-            }else{
-                botao.classList.add("incorrect")
-            }
-            
-            botao.disabled = true
-        })
+        console.log(event.target);
 
-        // console.log(event.target);
+        modificarCorBotao()
+
+        next_btn.classList.remove("hide");
+        perguntaAtual ++
+
+    }
+    function modificarCorBotao(){
+        document.querySelectorAll(".answer").forEach(button =>{
+            if(button.dataset.correct === "true"){
+                button.classList.add("correct")
+            }else{
+                button.classList.add("incorrect")
+            }
+            button.disabled = true
+        })
     }
 
-    // function corBotao(){
-    //     document.querySelectorAll(".answear").forEach(botao =>{
-    //         if(botao.dataset.correct){
-    //             botao.classList.add(".correct")
-                
-    //         }else{
-    //             botao.classList.add(".incorrect")
-    //         }
-            
-    //         botao.disabled = true
-    //     })
-    // }
 
+    function finishGame(){
+        const totalQuestões = questions.length
+        const acertos = Math.floor(totalAcertos * 100 / totalQuestões)
+
+        let mensagem = ""
+
+        if(acertos >= 90){
+            mensagem = ":)"
+        }else if(acertos >= 70){
+            mensagem = ":)"
+        }else if(acertos >= 50) {
+            mensagem = ":|"
+        }else{
+            mensagem = ":("
+        }
+
+        box_div.innerHTML = `
+           <center>
+            <p>você acertou ${totalAcertos}/${acertos} de ${totalQuestões} questões!</p>
+            <br>
+            <p>Resultado ${mensagem}</p>
+            <center>
+            <br>
+            <button class="button" onclick="voltarParaDashboard()">Ver Ranking</button>
+        `
+
+
+    }
+
+    function voltarParaDashboard(){
+        setTimeout(function () {
+            window.location = "./dashboard/cards.html";
+          }, 1000); 
+    }
+        
 
 
     const questions = [
