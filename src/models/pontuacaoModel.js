@@ -2,7 +2,8 @@ var database = require("../database/config");
 
 function listar() {
     var instrucao = `
-        SELECT * FROM pontuacao;
+    Select  idUsuario ,idPontuacao, nome, fkUsuario, pontuacao From usuario
+    JOIN pontuacao on fkUsuario = idUsuario;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -16,9 +17,9 @@ function cadastrar(nome) {
     return database.executar(instrucao);
 }
 
-function pontuar(pontuacao) {
+function pontuar(pontuacao, idUsuario) {
     var instrucao = `
-        INSERT INTO pontuacao (pontuacao) VALUES ('${pontuacao}');
+       insert into pontuacao (pontuacao ,  fkUsuario) values ('${pontuacao}' ,'${idUsuario}');
     `;
     console.log("Executando a intrução SQL: \n" + instrucao);
     return database.executar(instrucao);

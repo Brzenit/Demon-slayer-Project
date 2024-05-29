@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,18 @@
     <link rel="stylesheet" href="./css/quiz.css">
     <link rel="shortcut icon" href="./img/Icons/Demon-Slayer-Logo (1).ico">
 </head>
+
 <body>
-    <div> 
-    <button class="button back">
-        <a href="./index.html">
-            Voltar
-        </a>
-    </button>    
+    <div>
+        <button id="back_btn" class="button back">
+            <a href="./index.html">
+                Voltar
+            </a>
+        </button>
     </div>
-    
-        <div class="container">
-       
+<!-- <img src="" alt="FELIZ"> -->
+    <div class="container">
+
         <div id="box_div" class="question-container hide">
             <center class="question">Pegunta sobre Demon Slayer Aqui</center>
             <div id="respostas_div" class="answers-container">
@@ -30,71 +32,76 @@
         <div class="controls-container">
             <button id="start_btn" onclick="iniciarQuiz()" class="button">
                 Começar Quiz
-            </button>        
-            <button id="next_btn" onclick="nextQuestion()" class="button hide">
+            </button>
+            <button id="next_btn" onclick="nextQuestion()" class="next-question button hide">
                 Proxima Pergunta
             </button>
         </div>
     </div>
-
+<!-- <img src="" alt="BRAVO"> -->
 
 </body>
+
 </html>
 
 <script>
-    
+
     const perguntaText = document.querySelector(".question");
     let perguntaAtual = 0;
-    let totalAcertos = 0; 
+    let totalAcertos = 0;
 
     start_btn.addEventListener("click", iniciarQuiz);
     next_btn.addEventListener("click", nextQuestion);
-
-
-    function iniciarQuiz(){
+    
+    
+    function iniciarQuiz() {
+        shuffle(questions);
+        shuffleQuestionsAndAnswers(questions);
+        
+        back_btn.classList.add("hide");
         start_btn.classList.add("hide");
-        box_div.classList.remove("hide");  
+        box_div.classList.remove("hide");
         nextQuestion();
     }
 
-    function nextQuestion(){
+    function nextQuestion() {
         resetTudo();
-        
-        if(questions.length === perguntaAtual){
+
+        if (questions.length === perguntaAtual) {
             return finishGame();
         }
 
         perguntaText.textContent = questions[perguntaAtual].question
-        questions[perguntaAtual].answers.forEach(answer =>{
+        questions[perguntaAtual].answers.forEach(answer => {
             const novaResposta = document.createElement("button")
-            novaResposta.classList.add( "answer" , "button" )
+            novaResposta.classList.add("answer", "button")
             novaResposta.textContent = answer.text
-            if(answer.correct){
+            if (answer.correct) {
                 novaResposta.dataset.correct = answer.correct
-                
+
             }
             respostas_div.appendChild(novaResposta)
-            
+
             novaResposta.addEventListener("click", selecionarResposta)
-        
+
         })
     }
 
-    function resetTudo(){
-        while(respostas_div.firstChild){
-                respostas_div.removeChild(respostas_div.firstChild);
-            };
-            document.body.classList.remove("correct" , "incorrect");
-            next_btn.classList.add("hide");
+    function resetTudo() {
+        while (respostas_div.firstChild) {
+            respostas_div.removeChild(respostas_div.firstChild);
+        };
+        document.body.classList.remove("correct", "incorrect");
+        next_btn.classList.add("hide");
     }
 
-    function selecionarResposta(event){
+    function selecionarResposta(event) {
         const respostaSelecionada = event.target;
 
-        if(respostaSelecionada.dataset.correct){
+        if (respostaSelecionada.dataset.correct) {
             document.body.classList.add("correct");
-            totalAcertos ++
-        }else{
+            totalAcertos++
+        } else {
             document.body.classList.add("incorrect");
         }
         console.log(event.target);
@@ -102,34 +109,32 @@
         modificarCorBotao()
 
         next_btn.classList.remove("hide");
-        perguntaAtual ++
+        perguntaAtual++
 
     }
-    function modificarCorBotao(){
-        document.querySelectorAll(".answer").forEach(button =>{
-            if(button.dataset.correct === "true"){
+    function modificarCorBotao() {
+        document.querySelectorAll(".answer").forEach(button => {
+            if (button.dataset.correct === "true") {
                 button.classList.add("correct")
-            }else{
+            } else {
                 button.classList.add("incorrect")
             }
             button.disabled = true
         })
     }
-
-
-    function finishGame(){
+    function finishGame() {
         const totalQuestões = questions.length
         const acertos = Math.floor(totalAcertos * 100 / totalQuestões)
 
         let mensagem = ""
 
-        if(acertos >= 90){
+        if (acertos >= 90) {
             mensagem = ":)"
-        }else if(acertos >= 70){
+        } else if (acertos >= 70) {
             mensagem = ":)"
-        }else if(acertos >= 50) {
+        } else if (acertos >= 50) {
             mensagem = ":|"
-        }else{
+        } else {
             mensagem = ":("
         }
 
@@ -140,129 +145,185 @@
             <p>Resultado ${mensagem}</p>
             <center>
             <br>
-            <button class="button" onclick="voltarParaDashboard()">Ver Ranking</button>
+            <button class="button" onclick="pontuar()">Ver Ranking</button>
         `
-
-
     }
 
-    function voltarParaDashboard(){
+    function voltarParaDashboard() {
         setTimeout(function () {
             window.location = "./dashboard/cards.html";
-          }, 1000); 
+        }, 1000);
     }
+
+    function shuffle(questions) {
+        // Percorre o array de trás para frente
+        for (let i = questions.length - 1; i > 0; i--) {
+            // Gera um índice aleatório entre 0 e i
+            const j = Math.floor(Math.random() * (i + 1));
+            // Troca o elemento na posição i com o elemento na posição j
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+    }
+
+
+    function shuffleQuestionsAndAnswers(questions) {
         
+        questions.forEach(question => {
+            shuffle(question.answers);
+        });
+    }
+
+//funcção que calcula o tempo inicia em uma variavel global 
+
+
+    function pontuar() {
+        console.log("estou na func pontuar.")
+        var idUsuario = sessionStorage.ID_USUARIO;
+        console.log(idUsuario)
+        // var pontuacao = totalAcertos.pontuacao;
+
+        fetch(`/pontuacao/pontuar/`,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuarioServer: idUsuario,
+                totalAcertosServer: totalAcertos
+            })
+            
+        }).then(function(resposta) {
+            
+            console.log("resposta:", resposta);
+
+            if(resposta.ok){
+                alert("pontuação realizada com sucesso! pelo "+ idUsuario + " com total de: " + totalAcertos + " pontos!");
+                window.location = "/TestROta.html";
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar cadastrar a pontuação! Código da resposta: " + resposta.status);
+            }
+        })
+            .catch(function (resposta) {
+                console.log(`Erro: ${resposta}`);
+
+            });
+
+            return false;
+    }
 
 
     const questions = [
         {
-            question: "Pergunta 1",
+            question: "Qual é a relação entre Nezuko e Tanjiro?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Eles são primos", correct: false },
+                { text: "Eles são irmãos", correct: true },
+                { text: "Eles são amigos de infância", correct: false },
+                { text: "Eles são mestre e aprendiz", correct: false }
+            ]
+        },
+        {   
+            question: "Qual é a habilidade especial de Nezuko após se transformar em demônio?",
+            answers: [
+                { text: "Sangue explosivo", correct: true },
+                { text: "Manipular o tempo", correct: false },
+                { text: "Invocar espíritos", correct: false },
+                { text: "Controlar o fogo", correct: false }
             ]
         },
         {
-            question: "Pergunta 2",
+            question: "Qual é a respiração utilizada por Tanjiro?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Respiração do Fogo", correct: false },
+                { text: "Respiração do Trovão", correct: false },
+                { text: "Respiração da Água", correct: true },
+                { text: "Respiração da Flor", correct: false }
             ]
         },
         {
-            question: "Pergunta 3",
+            question: "Qual o principal objetivo de Tanjiro na série?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Se tornar o Hashira mais forte", correct: false },
+                { text: "Derrotar todos os demônios", correct: false },
+                { text: "Encontrar uma cura para Nezuko", correct: true },
+                { text: "Vingar a morte de seus pais", correct: false }
             ]
         },
         {
-            question: "Pergunta 4",
+            question: "Qual é o maior medo de Zenitsu?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Altura", correct: false },
+                { text: "Água", correct: false },
+                { text: "Mulheres", correct: false },
+                { text: "Demônios", correct: true }
             ]
         },
         {
-            question: "Pergunta 5",
+            question: "Qual é a técnica que Zenitsu usa para combater demônios?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Respiração do Trovão", correct: true },
+                { text: "Respiração da Fera", correct: false },
+                { text: "Respiração da Água", correct: false },
+                { text: "Respiração do Vento", correct: false }
             ]
         },
         {
-            question: "Pergunta 6",
+            question: "Quem é o Hashira do Som?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Giyu Tomioka", correct: false },
+                { text: "Sanemi Shinazugawa", correct: false },
+                { text: "Kyojuro Rengoku", correct: false },
+                { text: "Tengen Uzui", correct: true }
             ]
         },
         {
-            question: "Pergunta 7",
+            question: "Quantas esposas Tengen Uzui tem?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Uma", correct: false },
+                { text: "Três", correct: true },
+                { text: "Duas", correct: false },
+                { text: "Quatro", correct: false }
             ]
         },
         {
-            question: "Pergunta 8",
+            question: "Qual é a técnica especial de Kyojuro Rengoku?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Respiração do Vento", correct: false },
+                { text: "Respiração da Pedra", correct: false },
+                { text: "Respiração das Chamas", correct: true },
+                { text: "Respiração do Trovão", correct: false }
             ]
         },
         {
-            question: "Pergunta 9",
+            question: "Qual é o destino de Kyojuro Rengoku após a luta contra Akaza?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Ele derrota Akaza", correct: false },
+                { text: "Ele morre", correct: true },
+                { text: "Ele se torna um demônio", correct: false },
+                { text: "Ele se aposenta", correct: false }
             ]
         },
         {
-            question: "Pergunta 10",
+            question: "Quem é o líder dos Hashiras?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Kagaya Ubuyashiki", correct: true },
+                { text: "Tanjiro Kamado", correct: false },
+                { text: "Kyojuro Rengoku", correct: false },
+                { text: "Giyu Tomioka", correct: false }
             ]
         },
         {
-            question: "Pergunta 11",
+            question: "Qual é o nome do demônio principal que Tanjiro e seus amigos estão tentando derrotar?",
             answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
+                { text: "Akaza", correct: false },
+                { text: "Daki", correct: false },
+                { text: "Gyutaro", correct: false },
+                { text: "Muzan Kibutsuji", correct: true }
             ]
         },
-        {
-            question: "Pergunta 12",
-            answers: [
-                {text: "Resposta 1", correct:false},
-                {text: "Resposta 2", correct:false},
-                {text: "Resposta 3", correct:true},
-                {text: "Resposta 4", correct:false}
-            ]
-        },
-    ]
+    ];
+
 
 </script>

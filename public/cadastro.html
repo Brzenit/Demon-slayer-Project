@@ -24,14 +24,13 @@
               />
             </div>
             <div class="field">
-              
-              <input type="password" class="input-field" id="senha_input" placeholder="Senha" />
+              <input type="email" class="input-field" id="email_input" placeholder="E-mail" />      
             </div>
             <div class="field">
+              <input type="password" class="input-field" id="senha_input" placeholder="Senha" />
+            </div>
+            <div class="field">          
             <input type="password" class="input-field" id="confirmacao_senha_input" placeholder="Repita a Senha" />     
-          </div>
-          <div class="field">          
-          <input type="email" class="input-field" id="email_input" placeholder="E-mail" />     
         </div>
             <div class="btn">
               <button class="button1">
@@ -87,7 +86,7 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar
-        // empresaServer: empresaVar
+      
       }),
     })
       .then(function (resposta) {

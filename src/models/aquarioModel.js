@@ -3,7 +3,7 @@ var database = require("../database/config");
 function buscarAquariosPorEmpresa(empresaId) {
   //perguntar como puxar um atributo do banco
 
-  var instrucaoSql = `SELECT * FROM usuario a WHERE idUsuario = ${1}`;
+  var instrucaoSql = `SELECT * FROM usuario a WHERE idUsuario = ${empresaId}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

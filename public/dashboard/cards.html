@@ -21,7 +21,7 @@
 </head>
 
 <body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
-
+    
     <div class="janela">
 
         <div class="header-left dash-header">
@@ -34,6 +34,13 @@
 
             <div class="btn-nav">
                 <h3>Aquários</h3>
+            </div>
+
+            <div class="btn-nav">
+                <h3>
+                    <a href="../quiz.html">
+                        Quiz
+                    </a></h3>
             </div>
 
             <div class="btn-nav-white">
@@ -58,7 +65,11 @@
             <div id="alerta">
             </div>
             <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
+
+                <div id="div_exibirResultado">
+
+                </div>
+                <!-- <p class="titulo-legenda">
                     Legenda - Parâmetros para Alertas
                 </p>
                 <div class="parametros-alerta">
@@ -82,7 +93,7 @@
                         <p>Perigo</p>
                         <p>&gt;=23°C</p>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="cards" id="cardAquarios">
@@ -97,23 +108,27 @@
 
 <script>
 
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
-    }
+    // function exibirAquarios() {
+    //     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+    //         document.getElementById("cardAquarios").innerHTML += `
+    //                 <div class="card-aquario">
+    //                     <div class="title-aquario">
+    //                         <h1>${item.descricao}</h1>
+    //                     </div>
+    //                     <div class="desc-aquario">
+    //                     <div class="temperatura">
+    //                         <p id="temp_aquario_${item.id}">-°C</p>
+    //                     </div>
+    //                     <div class="cor-alerta" id="card_${item.id}"></div>
+    //                 </div>
+    //                 </div>
+    //                 `
+    //     });
+    // }
+        listar();
+
+
+    div_exibirResultado.innerHTML = ` ${teste}`
 
 </script>
 

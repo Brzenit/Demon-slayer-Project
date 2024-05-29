@@ -221,6 +221,7 @@ section.mangaClass .flex {
 
 .mangaClass {
   background-color: rgb(253, 253, 253);
+  position: absolute;
 }
 
 .mangaClass .txt-manga h2 {
@@ -239,6 +240,8 @@ section.mangaClass .flex {
 .mangaClass .txt-manga p {
   text-align: left;
   font-size: 19px;
+  margin-left: -100px;
+  margin-right: -150px;
 }
 
 .carrosel-manga {
@@ -294,20 +297,11 @@ section.mangaClass .flex {
   transform: scale(1.05);
   /* border-radius: 30px;  */
 }
-/* 
-@keyframes flutuar2 {
-  0% {
-    top: 0;
-  }
 
-  100% {
-    top: 10px;
-  }
-} */
 .card-title{
   width: 800px;
   height: 800px;
-  /* margin: -80; */
+  margin-right: -150px;
 }
 
 .card-carrosel{
@@ -348,11 +342,120 @@ section.mangaClass {
   box-shadow: 1px 5px 5px #00192d53;
 }
 
+.img-hashiras{
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
 .anime{
+  margin-top: -1032px;
   width: 99.46vw;
-  height: 80vh;
-  background-image: url(../img/background.jpg);
+  height: 100vh;
+  background: linear-gradient(-260deg, #000 40%, rgba(0, 0, 0, 0) 55%) ;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 10%;
+  color:white;
+  position: absolute;
+  z-index: 3;
+}
+
+
+
+.anime h1{
+  font-size: 80px;
+}
+
+.texto-anime{
+  margin-left: 100px;
+  margin-top: 280px;
+  width: 50%;
+}
+
+.boxes{
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: space-evenly;
+}
+
+.box-link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  background-color: rgba(255, 0, 0,0.5);
+  width: 360px;
+  height: 120px;
+  border: rgba(0, 0, 0, 0.5) 5px solid;
+}
+
+.box-link:hover{
+  transform: scale(1.2);
+}
+
+.orange{
+  background-color: rgba(255, 136, 0, 0.5);
+}
+
+
+.projetoClass{
+  position: absolute;
+  margin-top: 915px;
+
+  display: flex;
+}
+
+.Eu{
+  width: 700px;
+  height:auto;
+}
+
+.div-projeto{
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  justify-content: space-evenly;
+}
+
+.textosProjeto{
+  width: 30%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  justify-content: space-around;
+  width: 99.46vw;
+  height: 130px;
+  margin-top: 1630px; 
+  position: absolute; 
+  background-color: black; 
+  color: white;
+}
+
+.footer .pages-footer ul{
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  list-style: none;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.footer .contato-footer{
+  gap: 60px;
+}
+
+.footer .contato-footer img{
+  width: 60px;
 }
