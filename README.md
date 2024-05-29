@@ -1,32 +1,38 @@
 <img src="/public/img/Honoikazuchi_no_Kami.webp" width="600px">
 
-_Demon Slayer - Kimetsu no Yaiba - WebSite project_
+## Demon Slayer - Kimetsu no Yaiba - WebSite project
 
-_Implementado com a API web-data-viz-Sptech_
+Este projeto tem como propósito mostrar um pouco sobre o Universo de Demon slayer para aqueles que não conhecem e para os já familiarizados um quiz para desafiar seus conhecimentos. Em um site Web Feito por mim com algumas informações importantes e alguns fatos divertidos sobre a obra.
 
 <hr>
+
+_Implementado com a API web-data-viz-Sptech_
+_Front-end feito utilizando:_ <br>
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+
+## Requisitos para instalação 
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 
 # Como usar
 
 1. Clone este repositório em sua máquina.
 
 
-1. Crie, no Banco de Dados, as tabelas necessárias para o funcionamento deste projeto.
-- Siga as instruções no arquivo **/src/database/script-tabelas.sql**
+1. Crie, no Banco de Dados, as tabelas necessárias para o funcionamento deste projeto.(<a href="src/database/script-tabelas.sql">DemonSlayerBD</a>)
 
 
-3. Acesse o arquivo **app.js** e parametrize o ambiente.
-- Se você estiver utilizando o Ambiente de Produção (remoto), comente a linha 2 e deixe habilitada a linha 1 onde está o valor **var ambiente_processo = 'producao';**
-- Se você estiver utilizando o Ambiente de Desenvolvimento (local), comente a linha 1 e deixe habilitada a linha 2 onde está o valor **var ambiente_processo = 'desenvolvimento';**
+3. Adicione as credenciais de Banco de Dados no arquivo **.env** e em **.end.dev**, seguindo as instruções neste.
 
-4. Adicione as credenciais de Banco de Dados no arquivo **.env** ou em **.end.dev**, seguindo as instruções neste.
-
-5. Acesse este repositório no seu terminal (GitBash ou VSCode) e execute os comandos abaixo:
+4. Acesse este repositório no seu terminal (GitBash, VSCode ou PowerShell) e execute os comandos abaixo:
 
 ```
 npm i
 ``` 
-_O comando acima irá instalar as bibliotecas necessárias para o funcionamento do projeto. As bibliotecas a serem instaladas estão listadas no arquivo **package.json** então é muito importante que este não seja alterado. Será criada uma nova pasta/diretório chamado **node_modules** quando o comando for finalizado, que é onde as bibliotecas estão localizadas. Não altere a pasta/diretório._
+_O comando acima irá instalar as bibliotecas necessárias para o funcionamento do projeto. Não altere a pasta/diretório._
 
 ```
 npm start
@@ -34,8 +40,18 @@ npm start
 
 _O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a sua parametrização feita nos passos anteriores._
 
-6. Para "ver" seu projeto funcionando, acesse em seu navegador o caminho **informado no terminal**.
+6. Para "ver" seu projeto funcionando, acesse em seu navegador o caminho **http://localhost:3333**.
 
-7. Caso queira parar a execução, tecle **CTRL+C** no terminal em que o projeto está rodando.
+7. Caso queira parar a execução, tecle **CTRL+C** no terminal em que o projeto está rodando. E pressione "S".
+
 
 ## Informações do Projeto
+
+📷 _Capturas de Tela do Projeto_
+
+<img src=""> <br>
+##
+<img src=""> <br>
+##
+<img src=""> <br>
+##
