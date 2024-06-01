@@ -2,58 +2,113 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/Icons/Demon-Slayer-Logo (1).ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
-
-    <link rel="shortcut icon" href="./img/Icons/Demon-Slayer-Logo (1).ico">
+    <title>Demon Slayer | Dashboards</title>
+    
     <link rel="stylesheet" href="./../css/dashboards.css">
+
     <link rel="stylesheet" href="./../css/estilo.css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="../js/sessao.js"></script>
-    <script src="../js/alerta.js"></script>
+    <!-- <script src="../js/alerta.js"></script> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+
+
+    <style>
+        .janela {
+            background-color: aqua !important;
+        }
+
+        .geral {
+            background-color: blueviolet;
+        }
+
+        .teste {
+            display: flex;
+            gap: 50px;
+        }
+
+        .dash {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .area-kpis {
+            display: flex;
+            gap: 190px;
+        }
+
+        .kpi {
+            width: 215px;
+            height: 200px;
+            border-radius: 25px;
+            border: solid red 4px;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            /* font-size: 35px;
+            font-weight: 700; */
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 3px 50px rgba(255, 255, 255, 0.7);
+        }
+        .kpi p{
+            font-size: 22px;
+            font-weight: 300;
+        }
+        .kpi span{
+            font-size: 35px;
+            font-weight: 700;
+        }
+
+        .grafico {
+            width: 750px;
+            background-color: rgb(41, 41, 41);
+            border: 2px solid black;
+            border-radius: 25px;
+            gap: 50px;
+            box-shadow: 0 0px 15px rgba(59, 59, 59, 0.7);
+        }
+    </style>
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
-    
+<body onload="grafico(), validarUsuario()">
+
     <div class="janela">
 
         <div class="header-left dash-header">
-
-            <h1>AquaTech</h1>
+            <img src="/img/SemFundo/Demon-Slayer-Logo.png" style="width: 380px;">
+            <h1 class="title">Demon Slayer | Project</h1>
 
             <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                <h3>Olá, bem vindo <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav">
-                <h3>Aquários</h3>
-            </div>
-
-            <div class="btn-nav">
+            <div class="btn-nav-white">
                 <h3>
                     <a href="../quiz.html">
-                        Quiz
-                    </a></h3>
+                        Refazer Quiz?
+                    </a>
+                </h3>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
+            <div class="btn-nav">
+                
+                    <h3>Dashboard</h3>
+                
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
+           
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
@@ -61,46 +116,41 @@
 
         </div>
 
+
+
         <div class="dash">
             <div id="alerta">
             </div>
-            <div class="area-parametros-alerta">
+            <div class="area-kpis">
 
-                <div id="div_exibirResultado">
-
+                <div class="kpi">
+                    <p>Média Pontos</p>
+                    <span id="kpi1">7</span>
                 </div>
-                <!-- <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
-                </div> -->
-            </div>
 
-            <div class="cards" id="cardAquarios">
+                <div class="kpi">
+                    <p>Vezes que foi jogado</p>
+                    <span id="kpi2">15</span>
+                </div>
+
+                <div class="kpi">
+                    <p>Melhor Jogador</p>
+                    <span id="kpi3">Bryan</span>
+                </div>
 
             </div>
 
+            <div class="teste" id="Graficos">
+                <div id="Grafico1" class="grafico ">
+                    <canvas id="pontuacaoChart" class="chart" width="440px"></canvas>
+                </div>
+                <div id="Grafico2" class="grafico">
+                    <canvas id="pontuacaoChart1" class="chart"></canvas>
+                </div>
+            </div>
         </div>
+
+
 
     </div>
 
@@ -108,27 +158,151 @@
 
 <script>
 
-    // function exibirAquarios() {
-    //     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-    //         document.getElementById("cardAquarios").innerHTML += `
-    //                 <div class="card-aquario">
-    //                     <div class="title-aquario">
-    //                         <h1>${item.descricao}</h1>
-    //                     </div>
-    //                     <div class="desc-aquario">
-    //                     <div class="temperatura">
-    //                         <p id="temp_aquario_${item.id}">-°C</p>
-    //                     </div>
-    //                     <div class="cor-alerta" id="card_${item.id}"></div>
-    //                 </div>
-    //                 </div>
-    //                 `
-    //     });
-    // }
-        listar();
+    let ListaUsuarios = [];
+    let ListaPontuacao = [];
 
 
-    div_exibirResultado.innerHTML = ` ${teste}`
+    function validarUsuario(){
+        var Usuario = sessionStorage.NOME_USUARIO
+        
+        b_usuario.innerHTML = Usuario;
+
+    }
+
+    function grafico() {
+
+        // fetch('/pontuacao/listar', { method: 'POST' })
+        //     .then(response => response.json())
+        //     .then(pontuacoes => {
+        //         // ... (código do gráfico como mostrado acima) 
+        //     })
+        //     .catch(error => console.error('Erro ao buscar pontuações:', error));
+
+
+        fetch('/pontuacao/listar', { method: 'POST' })
+            .then(response => response.json())
+            .then(pontuacoes => {
+                // 1. Declarando as Arrays:
+                const labels = []; // Array para armazenar os rótulos do eixo X (Usuários)
+                const data = [];   // Array para armazenar os dados do eixo Y (Pontuações)
+                const arrayDupla = [];
+
+                // 2. Iterando sobre os Dados da API:
+                pontuacoes.forEach(pontuacao => {
+                    // Para cada objeto 'pontuacao' recebido da API:
+
+                    // 3. Formatando e Adicionando Rótulos:
+                    labels.push(pontuacao.nome);
+                    // - Crie uma string formatada com "Usuário" e o ID do usuário.
+                    // - Adicione essa string formatada ao array 'labels' usando 'push'.
+
+                    // 4. Adicionando Pontuações:
+                    data.push(pontuacao.pontuacao);
+                    // - Extraia a pontuação do objeto 'pontuacao'.
+                    // - Adicione a pontuação ao array 'data' usando 'push'.
+
+                    arrayDupla.push({
+                        NAME: pontuacao.nome, POINTS: pontuacao.pontuacao
+                    },);
+                });
+                // console.log(arrayDupla);
+                // Limita os dados para os últimos 7 valores
+                const ultimosLabels = labels.slice(-7);
+                const ultimosDados = data.slice(-7);
+
+                // Obtendo o contexto do canvas
+                const ctx = document.getElementById('pontuacaoChart').getContext('2d');
+
+                // Criando o gráfico de barras (você pode escolher outro tipo)
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ultimosLabels,
+                        datasets: [{
+                            label: 'Ultimas Pontuações',
+                            data: ultimosDados,
+                            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                            borderColor: 'rgba(255, 0, 0, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        // Opções de personalização do gráfico (título, eixos, etc.)
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+
+
+                // Ordena a array em ordem decrescente
+                arrayDupla.sort((a, b) => b.POINTS - a.POINTS);
+
+                // Pega os primeiros 7 valores da array ordenada
+                const top7 = arrayDupla.slice(0, 7);
+
+                const top7Names = top7.map(item => item.NAME);
+                const top7Points = top7.map(item => Number(item.POINTS));
+
+                const topNome = []
+                const topValor = []
+
+                for (let i = 0; i < top7Names.length; i++) {
+                    topNome.push(top7Names[i]);
+                    topValor.push(top7Points[i]);
+                }
+
+                console.log(topNome);
+
+                console.log(topValor);
+
+                let soma = 0
+                for(let i = 0; i <data.length; i++){
+                    soma += data[i];
+                }
+
+                let media = soma/data.length
+
+                kpi1.innerHTML = `${media.toFixed(2)}`
+                kpi2.innerHTML = `${data.length}`
+                kpi3.innerHTML = `${topNome[0]}`
+
+
+                const ctx1 = document.getElementById('pontuacaoChart1').getContext('2d');
+
+                new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: topNome,
+                        datasets: [{
+                            label: 'Melhores Pontuações',
+                            data: topValor,
+                            backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                            borderColor: 'rgba(0, 0, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        // Opções de personalização do gráfico (título, eixos, etc.)
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao buscar pontuações:', error));
+
+
+            
+    }
+
+
 
 </script>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Demon Slayer</title>
+    <title>Demon Slayer | Quiz</title>
     <link rel="stylesheet" href="./css/quiz.css">
     <link rel="shortcut icon" href="./img/Icons/Demon-Slayer-Logo (1).ico">
 </head>
@@ -21,6 +21,7 @@
     <div class="container">
 
         <div id="box_div" class="question-container hide">
+            <p id="questionAtual">01/10</p>
             <center class="question">Pegunta sobre Demon Slayer Aqui</center>
             <div id="respostas_div" class="answers-container">
                 <button onclick="selecionarResposta()" class="answer button" disabled>Resposta 1</button>
@@ -33,7 +34,7 @@
             <button id="start_btn" onclick="iniciarQuiz()" class="button">
                 Começar Quiz
             </button>
-            <button id="next_btn" onclick="nextQuestion()" class="next-question button hide">
+            <button id="next_btn"  class="next-question button hide">
                 Proxima Pergunta
             </button>
         </div>
@@ -63,13 +64,17 @@
         box_div.classList.remove("hide");
         nextQuestion();
     }
-
+    
+    QuestaoAtual = -1
     function nextQuestion() {
+        QuestaoAtual++
         resetTudo();
 
         if (questions.length === perguntaAtual) {
             return finishGame();
         }
+
+        questionAtual.innerHTML = `${QuestaoAtual}/12`
 
         perguntaText.textContent = questions[perguntaAtual].question
         questions[perguntaAtual].answers.forEach(answer => {
@@ -129,18 +134,18 @@
         let mensagem = ""
 
         if (acertos >= 90) {
-            mensagem = ":)"
+            mensagem = "Parabéns! você foi muito bem, conhece bastante coisa sobre Demon Slayer 😎"
         } else if (acertos >= 70) {
-            mensagem = ":)"
-        } else if (acertos >= 50) {
-            mensagem = ":|"
+            mensagem = "Boa! você acertou mais que 60% do questionario, é um Otaku Médio 👌"
+        } else if (acertos > 50) {
+            mensagem = "Poxa pode melhorar hein! mais já está acima de 50% dos acertos"
         } else {
-            mensagem = ":("
+            mensagem = "Ou você chegou aqui de paraquedas ou nem leu meu site😭"
         }
 
         box_div.innerHTML = `
            <center>
-            <p>você acertou ${totalAcertos}/${acertos} de ${totalQuestões} questões!</p>
+            <p>você acertou ${totalAcertos} de 12 Questões, Sua porcentagem de acerto foi de ${acertos}% !</p>
             <br>
             <p>Resultado ${mensagem}</p>
             <center>
@@ -197,8 +202,8 @@
             console.log("resposta:", resposta);
 
             if(resposta.ok){
-                alert("pontuação realizada com sucesso! pelo "+ idUsuario + " com total de: " + totalAcertos + " pontos!");
-                window.location = "/TestROta.html";
+                console.log("pontuação realizada com sucesso! pelo "+ idUsuario + " com total de: " + totalAcertos + " pontos!");
+                window.location = "./dashboard/cards.html";
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -291,7 +296,7 @@
             question: "Qual é a técnica especial de Kyojuro Rengoku?",
             answers: [
                 { text: "Respiração do Vento", correct: false },
-                { text: "Respiração da Pedra", correct: false },
+                { text: "Respiração da fogo", correct: false },
                 { text: "Respiração das Chamas", correct: true },
                 { text: "Respiração do Trovão", correct: false }
             ]

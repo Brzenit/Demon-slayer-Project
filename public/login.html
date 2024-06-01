@@ -11,7 +11,7 @@
 dialog {
     border: none;
     border-radius: 5px;
-    box-shadow: 0 3px 50px rgba(255, 251, 0, 0.7);
+    box-shadow: 0 3px 50px rgba(255, 94, 0, 0.7);
     padding: 20px;
     max-width: 600px;
     width: 80%;
@@ -78,7 +78,8 @@ dialog::backdrop{
           </button>
           <button class="button2" type="button"><a href="./cadastro.html">Cadastre-se</a></button>
         </div>
-        <button class="button3" type="button">Esqueceu a senha?</button>
+        <br><br>
+        <!-- <button class="button3" type="button">Esqueceu a senha?</button> -->
       </form>
     </div>
   </div>
@@ -88,7 +89,7 @@ dialog::backdrop{
   <dialog id="myModal">
       <div class="modal-content">
           <button id="closeModalBtn" class="close" onclick="closeModal()">&times;</button>
-          <h2 id="modalTitle">Modal Header</h2>
+          <h2 id="modalTitle">Erro ao logar!</h2>
           <p id="modalTxt">This is a simple modal.</p>
       </div>
   </dialog>
@@ -108,9 +109,9 @@ var btn = document.getElementById("openModalBtn");
 var closeBtn = document.getElementById("closeModalBtn");
 
 // When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modal.showModal();
-}
+// btn.onclick = function() {
+//     modal.showModal();
+// }
 
 // When the user clicks on the close button, close the modal
 function closeModal() {
@@ -131,8 +132,7 @@ modal.addEventListener('click', function(event) {
     var senhaVar = senha_input.value;
 
     if (emailVar == "" || senhaVar == "") {
-      modalTitle.innerHTML = `Erro ao Logar!`
-      modalTxt.innerHTML = `Preencha os campos corretamente!`;
+      modalTxt.innerHTML = `Preencha os todos campos!`;
       modal.showModal();
       // finalizarAguardar();
       return false;
@@ -153,7 +153,8 @@ modal.addEventListener('click', function(event) {
         emailServer: emailVar,
         senhaServer: senhaVar
       })
-    }).then(function (resposta) {
+    })
+    .then(function (resposta) {
       console.log("ESTOU NO THEN DO entrar()!")
 
       if (resposta.ok) {
@@ -167,19 +168,26 @@ modal.addEventListener('click', function(event) {
           sessionStorage.ID_USUARIO = json.idUsuario;
           // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
+          modalTitle.innerHTML =`Bem vindo , ${sessionStorage.NOME_USUARIO}!`
+          modalTxt.innerHTML = "Login realizado com sucesso, você será redirecionado em breve..."
+          modal.showModal();
+
           setTimeout(function () {
             window.location = "./dashboard/cards.html";
-          }, 1000); // apenas para exibir o loading
+          }, 1500); // apenas para exibir o loading
 
         });
 
       } else {
 
         console.log("Houve um erro ao tentar realizar o login!");
+        modalTitle.innerHTML = "Erro ao realizar o login!"
+        modalTxt.innerHTML = "verifique se preencheu seus dados corretamente!"
+        modal.showModal();
 
         resposta.text().then(texto => {
           console.error(texto);
-          // finalizarAguardar(texto);
+          
         });
       }
 

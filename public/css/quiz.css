@@ -19,12 +19,16 @@ body{
     
 }
 
+p{
+    font-size: 20px;
+}
+
 .container{
     background-color: black;
     width: 90%;
     max-width: 800px;
-    height: 35%;
-    max-height: 300px;
+    height: 40%;
+    max-height: 340px;
     
     border: 2px solid white;
     border-radius: 6px;
