@@ -9,7 +9,7 @@ function listar() {
     return database.executar(instrucao);
 }
 
-function cadastrar(nome) {
+function cadastrar(pontuacao) {
     var instrucao = `
         INSERT INTO pontuacao (pontuacao) VALUES ('${pontuacao}');
     `;

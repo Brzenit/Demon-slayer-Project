@@ -9,13 +9,9 @@
     <title>Demon Slayer | Dashboards</title>
     
     <link rel="stylesheet" href="./../css/dashboards.css">
-
     <link rel="stylesheet" href="./../css/estilo.css" />
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="../js/sessao.js"></script>
-    <!-- <script src="../js/alerta.js"></script> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -88,7 +84,7 @@
 
         <div class="header-left dash-header">
             <img src="/img/SemFundo/Demon-Slayer-Logo.png" style="width: 380px;">
-            <h1 class="title">Demon Slayer | Project</h1>
+            <h1 class="title">Demon Slayer - Project</h1>
 
             <div class="hello">
                 <h3>Olá, bem vindo <span id="b_usuario">usuário</span>!</h3>
@@ -106,6 +102,14 @@
                 
                     <h3>Dashboard</h3>
                 
+            </div>
+
+            <div class="btn-nav-white">
+                <h3>
+                    <a href="./mural.html">
+                        Forum
+                    </a>
+                </h3>
             </div>
 
            
@@ -138,6 +142,11 @@
                     <span id="kpi3">Bryan</span>
                 </div>
 
+                <div class="kpi">
+                    <p>Sua Colocação</p>
+                    <span id="kpi4">1</span>
+                </div>
+
             </div>
 
             <div class="teste" id="Graficos">
@@ -162,7 +171,7 @@
     let ListaPontuacao = [];
 
 
-    function validarUsuario(){
+    function validarUsuario(){  
         var Usuario = sessionStorage.NOME_USUARIO
         
         b_usuario.innerHTML = Usuario;
@@ -180,26 +189,21 @@
 
 
         fetch('/pontuacao/listar', { method: 'POST' })
-            .then(response => response.json())
+            .then(resultado => resultado.json())
             .then(pontuacoes => {
-                // 1. Declarando as Arrays:
+
                 const labels = []; // Array para armazenar os rótulos do eixo X (Usuários)
                 const data = [];   // Array para armazenar os dados do eixo Y (Pontuações)
                 const arrayDupla = [];
 
-                // 2. Iterando sobre os Dados da API:
                 pontuacoes.forEach(pontuacao => {
-                    // Para cada objeto 'pontuacao' recebido da API:
 
-                    // 3. Formatando e Adicionando Rótulos:
                     labels.push(pontuacao.nome);
-                    // - Crie uma string formatada com "Usuário" e o ID do usuário.
-                    // - Adicione essa string formatada ao array 'labels' usando 'push'.
-
-                    // 4. Adicionando Pontuações:
+                
+         
                     data.push(pontuacao.pontuacao);
-                    // - Extraia a pontuação do objeto 'pontuacao'.
-                    // - Adicione a pontuação ao array 'data' usando 'push'.
+  
+
 
                     arrayDupla.push({
                         NAME: pontuacao.nome, POINTS: pontuacao.pontuacao
@@ -227,36 +231,52 @@
                         }]
                     },
                     options: {
+                        Plugins:{
+                            title:{
+                                display: true,
+                                text: 'Ultimas Pontuações',
+                                position: 'top',
+                                padding: {
+                                    top: 10,
+                                    bottom: 30
+                                }
+
+                            }
+                        },
                         responsive: true,
                         // Opções de personalização do gráfico (título, eixos, etc.)
                         scales: {
                             y: {
                                 beginAtZero: true
-                            }
+                            },
+                        
                         }
                     }
                 });
-
 
 
                 // Ordena a array em ordem decrescente
                 arrayDupla.sort((a, b) => b.POINTS - a.POINTS);
 
                 // Pega os primeiros 7 valores da array ordenada
-                const top7 = arrayDupla.slice(0, 7);
+                const Nomes = arrayDupla.map(item => item.NAME);
 
+
+                const top7 = arrayDupla.slice(0, 7);
+                
                 const top7Names = top7.map(item => item.NAME);
                 const top7Points = top7.map(item => Number(item.POINTS));
-
+                
                 const topNome = []
                 const topValor = []
-
+                
                 for (let i = 0; i < top7Names.length; i++) {
                     topNome.push(top7Names[i]);
                     topValor.push(top7Points[i]);
                 }
-
-                console.log(topNome);
+                let posicao = (Nomes.indexOf(sessionStorage.NOME_USUARIO)+1)
+                
+                console.log(Nomes);
 
                 console.log(topValor);
 
@@ -270,6 +290,7 @@
                 kpi1.innerHTML = `${media.toFixed(2)}`
                 kpi2.innerHTML = `${data.length}`
                 kpi3.innerHTML = `${topNome[0]}`
+                kpi4.innerHTML = `${posicao}°`
 
 
                 const ctx1 = document.getElementById('pontuacaoChart1').getContext('2d');
@@ -287,7 +308,7 @@
                         }]
                     },
                     options: {
-                        // Opções de personalização do gráfico (título, eixos, etc.)
+  
                         scales: {
                             y: {
                                 beginAtZero: true
