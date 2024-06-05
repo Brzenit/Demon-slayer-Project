@@ -1,4 +1,4 @@
-<img src="/public/img/Honoikazuchi_no_Kami.webp" width="600px">
+<img src="./Projeto/public/img/Honoikazuchi_no_Kami.webp" width="500px">
 
 ## Demon Slayer - Kimetsu no Yaiba - WebSite project
 
@@ -49,9 +49,7 @@ _O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a 
 
 📷 _Capturas de Tela do Projeto_
 
-<img src=""> <br>
+<img src="./Projeto/public/img/Captura de tela 2024-06-03 222936.png" width="800px"> <br>
 ##
-<img src=""> <br>
-##
-<img src=""> <br>
+<img src="./Projeto/public/img/Captura de tela 2024-06-03 222950.png" width="800px"> <br>
 ##

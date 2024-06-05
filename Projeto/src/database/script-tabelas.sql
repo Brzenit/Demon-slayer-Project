@@ -8,7 +8,6 @@ create database demonslayerDB;
 
 use demonslayerDB;
 
-
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
@@ -17,8 +16,15 @@ CREATE TABLE usuario (
 );
 
 create table pontuacao(
-	idPontuacao int primary key auto_increment,
-	pontuacao int,
-	fkUsuario int,
-	foreign key (fkUsuario) references usuario(idUsuario)
+idPontuacao int primary key auto_increment,
+pontuacao int,
+fkUsuario int,
+foreign key (fkUsuario) references usuario(idUsuario));
+
+CREATE TABLE aviso (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	titulo VARCHAR(100),
+	descricao VARCHAR(150),
+	fk_usuario INT,
+	FOREIGN KEY (fk_usuario) REFERENCES usuario(idUsuario)
 );

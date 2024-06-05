@@ -243,7 +243,14 @@ section.mangaClass .flex {
   margin-left: -100px;
   margin-right: -150px;
 }
-
+.titulo-projeto{
+  font-size: 70px;
+  text-align: center;
+  color: #5c0000;
+}
+.texto-projeto{
+  font-size: 19px;
+}
 .carrosel-manga {
   width: 100%;
   display: grid;
@@ -285,6 +292,12 @@ section.mangaClass .flex {
   transform: translateX(25%);
   
 }
+
+.hover:hover{
+    transform: scale(1.2);
+    color: #ff0000;
+  }
+  
 
 
 .card-carrosel img {

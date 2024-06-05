@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demon Slayer | Dashboards</title>
-    
+
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -30,6 +30,7 @@
         .teste {
             display: flex;
             gap: 50px;
+            flex-direction: column;
         }
 
         .dash {
@@ -58,27 +59,29 @@
             flex-direction: column;
             box-shadow: 0 3px 50px rgba(255, 255, 255, 0.7);
         }
-        .kpi p{
+
+        .kpi p {
             font-size: 22px;
             font-weight: 300;
         }
-        .kpi span{
+
+        .kpi span {
             font-size: 35px;
             font-weight: 700;
         }
 
         .grafico {
             width: 750px;
-            background-color: rgb(41, 41, 41);
+            background-color: rgb(255, 255, 255);
             border: 2px solid black;
             border-radius: 25px;
             gap: 50px;
-            box-shadow: 0 0px 15px rgba(59, 59, 59, 0.7);
+            box-shadow: 0 5px 15px rgba(255, 252, 252, 0.7);
         }
     </style>
 </head>
 
-<body onload="grafico(), validarUsuario()">
+<body onload="grafico(), validarUsuario(),validarSessao()">
 
     <div class="janela">
 
@@ -99,20 +102,20 @@
             </div>
 
             <div class="btn-nav">
-                
-                    <h3>Dashboard</h3>
-                
+
+                <h3>Dashboard</h3>
+
             </div>
 
             <div class="btn-nav-white">
                 <h3>
                     <a href="./mural.html">
-                        Forum
+                        Fórum
                     </a>
                 </h3>
             </div>
 
-           
+
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
@@ -148,13 +151,21 @@
                 </div>
 
             </div>
+            <div style="display: flex; gap: 50px;text-align: center;">
 
-            <div class="teste" id="Graficos">
-                <div id="Grafico1" class="grafico ">
-                    <canvas id="pontuacaoChart" class="chart" width="440px"></canvas>
+                <div class="teste" id="Graficos">
+                    <h1 style="color: azure;">Ultimas pontuações</h1>
+                    <div id="Grafico1" class="grafico ">
+                        <!-- <p style="color: rgb(0, 0, 0);"><b>&nbsp&nbspUltimas Pontuações</b></p> -->
+                        <canvas id="pontuacaoChart" class="chart" width="440px"></canvas>
+                    </div>
                 </div>
-                <div id="Grafico2" class="grafico">
-                    <canvas id="pontuacaoChart1" class="chart"></canvas>
+                <div class="teste" id="Graficos">
+                    <h1 style="color: azure;">Ranking dos 7 Melhores</h1>
+                    <div id="Grafico2" class="grafico">
+                        <!-- <p style="color: rgb(0, 0, 0);"><b>&nbsp&nbsp&nbspMelhores Pontuações</b></p> -->
+                        <canvas id="pontuacaoChart1" class="chart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -171,9 +182,9 @@
     let ListaPontuacao = [];
 
 
-    function validarUsuario(){  
+    function validarUsuario() {
         var Usuario = sessionStorage.NOME_USUARIO
-        
+
         b_usuario.innerHTML = Usuario;
 
     }
@@ -198,11 +209,14 @@
 
                 pontuacoes.forEach(pontuacao => {
 
+
                     labels.push(pontuacao.nome);
-                
-         
+
+                    console.log("id usuario " + pontuacao.idUsuario)
+
+
                     data.push(pontuacao.pontuacao);
-  
+
 
 
                     arrayDupla.push({
@@ -231,17 +245,7 @@
                         }]
                     },
                     options: {
-                        Plugins:{
-                            title:{
-                                display: true,
-                                text: 'Ultimas Pontuações',
-                                position: 'top',
-                                padding: {
-                                    top: 10,
-                                    bottom: 30
-                                }
-
-                            }
+                        Plugins: {
                         },
                         responsive: true,
                         // Opções de personalização do gráfico (título, eixos, etc.)
@@ -249,7 +253,7 @@
                             y: {
                                 beginAtZero: true
                             },
-                        
+
                         }
                     }
                 });
@@ -258,34 +262,35 @@
                 // Ordena a array em ordem decrescente
                 arrayDupla.sort((a, b) => b.POINTS - a.POINTS);
 
-                // Pega os primeiros 7 valores da array ordenada
+
                 const Nomes = arrayDupla.map(item => item.NAME);
 
 
                 const top7 = arrayDupla.slice(0, 7);
-                
+
+
                 const top7Names = top7.map(item => item.NAME);
                 const top7Points = top7.map(item => Number(item.POINTS));
-                
+
                 const topNome = []
                 const topValor = []
-                
+
                 for (let i = 0; i < top7Names.length; i++) {
                     topNome.push(top7Names[i]);
                     topValor.push(top7Points[i]);
                 }
-                let posicao = (Nomes.indexOf(sessionStorage.NOME_USUARIO)+1)
-                
+                let posicao = (Nomes.indexOf(sessionStorage.NOME_USUARIO) + 1)
+
                 console.log(Nomes);
 
                 console.log(topValor);
 
                 let soma = 0
-                for(let i = 0; i <data.length; i++){
+                for (let i = 0; i < data.length; i++) {
                     soma += data[i];
                 }
 
-                let media = soma/data.length
+                let media = soma / data.length
 
                 kpi1.innerHTML = `${media.toFixed(2)}`
                 kpi2.innerHTML = `${data.length}`
@@ -308,7 +313,7 @@
                         }]
                     },
                     options: {
-  
+
                         scales: {
                             y: {
                                 beginAtZero: true
@@ -320,7 +325,7 @@
             .catch(error => console.error('Erro ao buscar pontuações:', error));
 
 
-            
+
     }
 
 

@@ -7,13 +7,19 @@
     <title>Demon Slayer | Quiz</title>
     <link rel="stylesheet" href="./css/quiz.css">
     <link rel="shortcut icon" href="./img/Icons/Demon-Slayer-Logo (1).ico">
+    <script src="../js/sessao.js"></script>
 </head>
 
-<body>
+<body onload="validarSessao()">
     <div>
-        <button id="back_btn" class="button back">
-            <a href="./index.html">
-                Voltar
+        <button id="back_btn" class="button back" onclick="limparSessao2()">
+              <a>Sair</a>  
+            
+        </button>
+        <br> <br> <br> <br> <br>
+        <button id="back_btn2" class="button back">
+            <a href="./dashboard/cards.html">
+                Pular Quiz?
             </a>
         </button>
     </div>
@@ -60,6 +66,7 @@
         shuffleQuestionsAndAnswers(questions);
         
         back_btn.classList.add("hide");
+        back_btn2.classList.add("hide");
         start_btn.classList.add("hide");
         box_div.classList.remove("hide");
         nextQuestion();
@@ -96,7 +103,7 @@
         while (respostas_div.firstChild) {
             respostas_div.removeChild(respostas_div.firstChild);
         };
-        document.body.classList.remove("correct", "incorrect");
+        document.body.classList.remove("correctb", "incorrectb");
         next_btn.classList.add("hide");
     }
 
@@ -104,10 +111,10 @@
         const respostaSelecionada = event.target;
 
         if (respostaSelecionada.dataset.correct) {
-            document.body.classList.add("correct");
+            document.body.classList.add("correctb");
             totalAcertos++
         } else {
-            document.body.classList.add("incorrect");
+            document.body.classList.add("incorrectb");
         }
         console.log(event.target);
 
@@ -147,7 +154,7 @@
            <center>
             <p>você acertou ${totalAcertos} de 12 Questões, Sua porcentagem de acerto foi de ${acertos}% !</p>
             <br>
-            <p>Resultado ${mensagem}</p>
+            <p>${mensagem}</p>
             <center>
             <br>
             <button class="button" onclick="pontuar()">Ver Ranking</button>

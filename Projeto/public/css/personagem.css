@@ -51,7 +51,7 @@ main .personagem .imagem {
     flex-direction: column;
     justify-content: flex-start;
     min-height: 100vh;
-    max-width: 380px;
+    max-width: 490px;
     z-index: 1;
 }
 
